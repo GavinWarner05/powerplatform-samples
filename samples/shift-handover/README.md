@@ -48,7 +48,7 @@ Select an issue, inspect its impact and next step, and open **Update issue**. Tr
 
 ## Validation and limitations
 
-The exported app was inspected for external connections and private data. The main preview, branding navigation, Ember preview and branding cancellation were checked in Studio. Full interaction regression, fresh-environment import and screen-reader testing have not been completed. Exported App Checker output contains accessibility/performance recommendations (screen name, decorative surface labels/tab stops, cross-screen event reference and text-input delay). Export metadata reports one parser error despite no binding errors; investigate in a fresh import before production use. This sample is submitted as a draft pending that verification.
+The exported app was inspected for external connections and private data. The main preview, branding navigation, Ember preview and branding cancellation were checked in Studio. Full interaction regression, fresh-environment import and screen-reader testing have not been completed. Exported App Checker output contains accessibility/performance recommendations (screen name, decorative surface labels/tab stops, cross-screen event reference and text-input delay). Studio App Checker reports **no formula errors**. The export metadata still reports one parser error and zero binding errors; this metadata discrepancy should be checked in a fresh import before production use. This sample is submitted as a draft pending that verification.
 
 ## Author
 
