@@ -1,0 +1,1105 @@
+# ************************************************************************************************
+# Warning: YAML source code for Canvas Apps should only be used to review changes made within Power Apps Studio and for minor edits (Preview).
+# Use the maker portal to create and edit your Power Apps.
+# 
+# The schema file for Canvas Apps is available at https://go.microsoft.com/fwlink/?linkid=2304907
+# 
+# For more information, visit https://go.microsoft.com/fwlink/?linkid=2292623
+# ************************************************************************************************
+Screens:
+  Screen1:
+    Properties:
+      Fill: =Brand.Canvas
+      LoadingSpinnerColor: =RGBA(0, 120, 212, 1)
+    Children:
+      - HtmlText1:
+          Control: HtmlViewer@2.1.0
+          Properties:
+            DisabledBorderColor: =RGBA(161, 159, 157, 1)
+            Font: =Font.'Segoe UI'
+            Height: =Parent.Height
+            HtmlText: ="<div style='position:relative;width:100%;height:" & Text(Parent.Height - 4) & "px;background:" & BrandCanvasCss & ";overflow:hidden;font-family:Segoe UI;'><div style='position:absolute;left:0;right:0;top:0;height:84px;background:" & BrandHeaderCss & ";'></div><div style='position:absolute;left:24px;top:24px;width:30px;height:30px;border-radius:9px;background:" & BrandAccentHex & ";color:" & Brand.AccentTextCss & ";font-size:25px;font-weight:800;text-align:center;line-height:27px;'>»</div>" & If(!varShowHistory && !varShowEditor, "<div style='position:absolute;left:16px;right:16px;top:96px;height:130px;border-radius:20px;background:linear-gradient(115deg," & BrandHeroStartCss & " 0%," & BrandHeroMiddleCss & " 65%," & BrandHeroEndCss & " 100%);overflow:hidden;box-shadow:0 8px 18px rgba(18,40,70,0.15);'><div style='position:absolute;right:165px;top:-105px;width:270px;height:270px;border:1px solid rgba(255,255,255,0.14);border-radius:50%;'></div><div style='position:absolute;right:120px;top:-60px;width:270px;height:270px;border:1px solid rgba(255,255,255,0.14);border-radius:50%;'></div></div>" & If(App.Width>=900 || varShowDetail, "<div style='position:absolute;left:" & Text(rctDetailSurface.X) & "px;top:238px;width:" & Text(rctDetailSurface.Width) & "px;height:" & Text(rctDetailSurface.Height) & "px;border-radius:18px;background:" & BrandSurfaceCss & ";box-shadow:0 6px 18px rgba(18,40,70,0.07);border:1px solid " & BrandSoftBorderCss & ";box-sizing:border-box;'><div style='height:5px;margin:0 22px;background:linear-gradient(90deg," & BrandPrimaryHex & "," & BrandAccentHex & ",transparent);border-radius:0 0 6px 6px;'></div></div>", "") & "<div style='position:absolute;left:16px;right:16px;top:" & Text(rctActionSurface.Y) & "px;height:" & Text(rctActionSurface.Height) & "px;border-radius:16px;background:" & BrandFooterCss & ";box-shadow:0 4px 12px rgba(18,40,70,0.12);'></div>", "") & "</div>"
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Width: =Parent.Width
+      - rctActionSurface:
+          Control: Rectangle@2.3.0
+          Properties:
+            BorderColor: =ColorValue("#E1E7ED")
+            BorderThickness: =1
+            DisplayMode: =DisplayMode.View
+            Fill: =Color.White
+            Height: =If(App.Width >= 900, 64, 94)
+            Visible: =false
+            Width: =Parent.Width - 32
+            X: =16
+            Y: =Parent.Height - If(App.Width >= 900, 96, 126)
+      - rctDetailSurface:
+          Control: Rectangle@2.3.0
+          Properties:
+            BorderColor: =ColorValue("#E1E7ED")
+            BorderThickness: =1
+            DisplayMode: =DisplayMode.View
+            Fill: =Color.White
+            Height: =Max(220, Parent.Height - If(App.Width < 900, 370, 342))
+            Visible: =false
+            Width: =If(App.Width >= 900, App.Width * 0.57 - 24, App.Width - 32)
+            X: =If(App.Width >= 900, App.Width * 0.43 + 8, 16)
+            Y: =238
+      - rctHeader:
+          Control: Rectangle@2.3.0
+          Properties:
+            DisplayMode: =DisplayMode.View
+            Fill: =ColorValue("#122E46")
+            Height: =84
+            OnSelect: =
+            Visible: =false
+            Width: =Parent.Width
+      - lblBrand:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Color.White
+            DisplayMode: =DisplayMode.View
+            FocusedBorderColor: =ColorValue("#006B63")
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =32
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =If(App.Width < 600, 16, 20)
+            Text: ="Shift handover"
+            Width: =If(App.Width < 600, Parent.Width-210, Parent.Width-320)
+            X: =68
+            Y: =18
+      - lblStrap:
+          Control: Label@2.5.1
+          Properties:
+            Color: =If(BrandDark,Brand.MutedText,ColorValue("#C3D9DE"))
+            DisplayMode: =DisplayMode.View
+            FocusedBorderColor: =ColorValue("#006B63")
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            Height: =24
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =8
+            Text: ="OPERATIONS, IN SYNC"
+            Width: =If(App.Width < 600, Parent.Width-210, Parent.Width-320)
+            X: =68
+            Y: =47
+      - btnHistory:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =Brand.Border
+            BorderThickness: =1
+            Color: =Color.White
+            Fill: =Brand.Selected
+            FocusedBorderColor: =Brand.Focus
+            Font: =Font.'Segoe UI'
+            Height: =If(App.Width < 600, 30, 40)
+            HoverColor: =Color.White
+            HoverFill: =Brand.Header
+            OnSelect: =Set(varShowHistory, !varShowHistory); Set(varShowEditor,false)
+            PressedColor: =Color.White
+            PressedFill: =Brand.Header
+            RadiusBottomLeft: =6
+            RadiusBottomRight: =6
+            RadiusTopLeft: =6
+            RadiusTopRight: =6
+            Size: =11
+            Text: ="History"
+            Width: =96
+            X: =Parent.Width - 120
+            Y: =If(App.Width < 600, 14, 22)
+      - lblDemo:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Brand.MutedText
+            DisplayMode: =DisplayMode.View
+            FocusedBorderColor: =ColorValue("#006B63")
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            Height: =24
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =9
+            Text: ="DEMO · Fictional data resets when the app is reopened. No messages are sent."
+            Width: =Parent.Width - 48
+            X: =24
+            Y: =Parent.Height - 30
+      - lblHandover:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Color.White
+            DisplayMode: =DisplayMode.View
+            FocusedBorderColor: =ColorValue("#006B63")
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =46
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =If(App.Width < 600, 16, 28)
+            Text: =LookUp(colHandovers, Id = varHandoverId).Title
+            Visible: =!varShowHistory && !varShowEditor
+            Width: =If(App.Width < 600, Parent.Width - 80, Parent.Width - 200)
+            X: =40
+            Y: =104
+      - lblStatus:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Color.White
+            DisplayMode: =DisplayMode.View
+            FocusedBorderColor: =ColorValue("#006B63")
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            Height: =24
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =11
+            Text: ="●  " & LookUp(colHandovers, Id = varHandoverId).Status & "   /   " & Text(CountRows(Filter(colIssues, Id in Filter(colLinks, HandoverId = varHandoverId).IssueId))) & " linked issues"
+            Visible: =!varShowHistory && !varShowEditor
+            Width: =Parent.Width - 48
+            X: =40
+            Y: =150
+      - txtSummary:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            AccessibleLabel: ="Shift summary"
+            BorderColor: =ColorValue("#C5D4DC")
+            BorderThickness: =If(Self.DisplayMode=DisplayMode.Edit,1,0)
+            Color: =If(BrandDark,Brand.Text,ColorValue("#D5E4EC"))
+            Default: =LookUp(colHandovers, Id = varHandoverId).Summary
+            DisplayMode: =If(LookUp(colHandovers, Id = varHandoverId).Status = "Draft", DisplayMode.Edit, DisplayMode.View)
+            Fill: =RGBA(0,0,0,0)
+            FocusedBorderColor: =Brand.Focus
+            Font: =Font.'Segoe UI'
+            Height: =44
+            HintText: ="Shift summary"
+            HoverBorderColor: =Brand.Focus
+            HoverColor: =Self.Color
+            HoverFill: =RGBA(0,0,0,0)
+            Mode: =TextMode.MultiLine
+            OnChange: =If(LookUp(colHandovers, Id = varHandoverId).Status = "Draft", Patch(colHandovers, LookUp(colHandovers, Id = varHandoverId), {Summary:Self.Text}))
+            PaddingLeft: =0
+            RadiusBottomLeft: =6
+            RadiusBottomRight: =6
+            RadiusTopLeft: =6
+            RadiusTopRight: =6
+            Size: =11
+            Visible: =!varShowHistory && !varShowEditor
+            Width: =Parent.Width - 80
+            X: =40
+            Y: =178
+      - btnAddIssue:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =Brand.Border
+            BorderThickness: =1
+            Color: =Brand.AccentText
+            Fill: =Brand.Accent
+            FocusedBorderColor: =Brand.Focus
+            Font: =Font.'Segoe UI'
+            Height: =If(App.Width < 900, 32, 40)
+            HoverColor: =Brand.AccentText
+            HoverFill: =Brand.Accent
+            OnSelect: =Set(varEditId,""); Set(varPriority,"Normal"); Set(varShowEditor,true); Reset(txtIssueTitle); Reset(txtImpact); Reset(txtNextStep); Reset(txtOwner)
+            PressedColor: =Brand.AccentText
+            PressedFill: =Brand.Accent
+            RadiusBottomLeft: =6
+            RadiusBottomRight: =6
+            RadiusTopLeft: =6
+            RadiusTopRight: =6
+            Size: =11
+            Text: ="+ Add issue"
+            Visible: =!varShowHistory && !varShowEditor && LookUp(colHandovers, Id = varHandoverId).Status <> "Acknowledged"
+            Width: =120
+            X: =Parent.Width - 160
+            Y: =If(App.Width < 900, 238, 112)
+      - lblIssues:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Brand.MutedText
+            DisplayMode: =DisplayMode.View
+            FocusedBorderColor: =ColorValue("#006B63")
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =24
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =10
+            Text: ="ISSUE QUEUE"
+            Visible: =!varShowHistory && !varShowEditor && (App.Width >= 900 || !varShowDetail)
+            Width: =If(App.Width >= 900, App.Width * 0.43 - 36, Parent.Width - 200)
+            X: =24
+            Y: =236
+      - galIssues:
+          Control: Gallery@2.15.0
+          Variant: BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0
+          Properties:
+            AccessibleLabel: ="Issues linked to this handover"
+            FocusedBorderThickness: =2
+            Height: =Max(120, Parent.Height - If(App.Width < 900, 420, 372))
+            Items: =Filter(colIssues, Id in Filter(colLinks, HandoverId = varHandoverId).IssueId)
+            OnSelect: =Set(varIssueId, ThisItem.Id); Set(varShowDetail,true)
+            TabIndex: =0
+            TemplatePadding: =4
+            TemplateSize: =88
+            Visible: =!varShowHistory && !varShowEditor && (App.Width >= 900 || !varShowDetail)
+            Width: =If(App.Width >= 900, App.Width * 0.43 - 36, App.Width - 48)
+            X: =24
+            Y: =If(App.Width < 900, 282, 264)
+          Children:
+            - htmlIssueSurface:
+                Control: HtmlViewer@2.1.0
+                Properties:
+                  Height: =88
+                  HtmlText: ="<div style='box-sizing:border-box;width:100%;height:86px;border-radius:14px;border:1px solid " & If(ThisItem.Id=varIssueId,BrandSelectedCss,BrandSoftBorderCss) & ";border-left:4px solid " & If(ThisItem.Priority="High","#F5B66B",If(ThisItem.Status="Resolved","#80C8B0","#39BFB0")) & ";background:" & If(ThisItem.Id=varIssueId,BrandSelectedCss,BrandSurfaceCss) & ";'></div>"
+                  OnSelect: =Select(Parent)
+                  PaddingBottom: =0
+                  PaddingLeft: =0
+                  PaddingRight: =0
+                  PaddingTop: =0
+                  Width: =Parent.TemplateWidth
+            - rctIssueCard:
+                Control: Rectangle@2.3.0
+                Properties:
+                  Fill: =RGBA(0,0,0,0)
+                  Height: =88
+                  OnSelect: =Select(Parent)
+                  Width: =Parent.TemplateWidth
+            - lblIssueTitle:
+                Control: Label@2.5.1
+                Properties:
+                  Color: =If(ThisItem.Id=varIssueId,Color.White,Brand.Text)
+                  Font: =Font.'Segoe UI'
+                  FontWeight: =FontWeight.Semibold
+                  Height: =38
+                  OnSelect: =Select(Parent)
+                  PaddingLeft: =0
+                  PaddingRight: =0
+                  Text: =ThisItem.Title
+                  Width: =Parent.TemplateWidth - 28
+                  X: =14
+                  Y: =8
+            - lblIssueMeta:
+                Control: Label@2.5.1
+                Properties:
+                  Color: =If(ThisItem.Id=varIssueId,Color.White,Brand.MutedText)
+                  Font: =Font.'Segoe UI'
+                  Height: =22
+                  OnSelect: =Select(Parent)
+                  PaddingLeft: =0
+                  PaddingRight: =0
+                  Size: =10
+                  Text: =ThisItem.Id & "  ·  " & ThisItem.Owner
+                  Width: =Parent.TemplateWidth - 28
+                  X: =14
+                  Y: =42
+            - lblIssueStatus:
+                Control: Label@2.5.1
+                Properties:
+                  Color: =If(ThisItem.Id=varIssueId,Color.White,If(ThisItem.Priority="High",Brand.HighText,Brand.GoodText))
+                  Font: =Font.'Segoe UI'
+                  Height: =20
+                  OnSelect: =Select(Parent)
+                  PaddingLeft: =0
+                  PaddingRight: =0
+                  Size: =10
+                  Text: =ThisItem.Status & "   /   " & ThisItem.Priority & " priority"
+                  Width: =Parent.TemplateWidth - 28
+                  X: =14
+                  Y: =64
+      - btnBackIssues:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =Brand.Border
+            BorderThickness: =1
+            Color: =Color.White
+            Fill: =Brand.Selected
+            FocusedBorderColor: =Brand.Focus
+            Font: =Font.'Segoe UI'
+            Height: =32
+            HoverColor: =Color.White
+            HoverFill: =Brand.Header
+            OnSelect: =Set(varShowDetail,false)
+            PressedColor: =Color.White
+            PressedFill: =Brand.Header
+            RadiusBottomLeft: =6
+            RadiusBottomRight: =6
+            RadiusTopLeft: =6
+            RadiusTopRight: =6
+            Size: =11
+            Text: ="< Issues"
+            Visible: =!varShowHistory && !varShowEditor && (App.Width >= 900 || varShowDetail) && App.Width < 900
+            Width: =98
+            X: =24
+            Y: =238
+      - lblDetailTitle:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Brand.Text
+            DisplayMode: =DisplayMode.View
+            FocusedBorderColor: =ColorValue("#006B63")
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =If(App.Width < 900, 40, 34)
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =If(App.Width < 900,16,18)
+            Text: =LookUp(colIssues, Id = varIssueId).Title
+            Visible: =!varShowHistory && !varShowEditor && (App.Width >= 900 || varShowDetail)
+            Width: =If(App.Width >= 900, App.Width * 0.57 - 48, App.Width - 48)
+            X: =If(App.Width >= 900, App.Width * 0.43 + 24, 24)
+            Y: =If(App.Width < 900, 276, 250)
+      - lblDetailMeta:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Brand.MutedText
+            DisplayMode: =DisplayMode.View
+            FocusedBorderColor: =ColorValue("#006B63")
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            Height: =24
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =10
+            Text: |-
+              =LookUp(colIssues, Id = varIssueId).Id & "  •  " & LookUp(colIssues, Id = varIssueId).Status & "  •  Owner: " & LookUp(colIssues, Id = varIssueId).Owner
+            Visible: =!varShowHistory && !varShowEditor && (App.Width >= 900 || varShowDetail)
+            Width: =If(App.Width >= 900, App.Width * 0.57 - 48, App.Width - 48)
+            X: =If(App.Width >= 900, App.Width * 0.43 + 24, 24)
+            Y: =If(App.Width < 900, 318, 286)
+      - lblImpactHeading:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Brand.Text
+            DisplayMode: =DisplayMode.View
+            FocusedBorderColor: =ColorValue("#006B63")
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =24
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =10
+            Text: ="IMPACT"
+            Visible: =!varShowHistory && !varShowEditor && (App.Width >= 900 || varShowDetail)
+            Width: =If(App.Width >= 900, App.Width * 0.57 - 48, App.Width - 48)
+            X: =If(App.Width >= 900, App.Width * 0.43 + 24, 24)
+            Y: =If(App.Width < 900, 348, 322)
+      - lblImpact:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Brand.Text
+            DisplayMode: =DisplayMode.View
+            FocusedBorderColor: =ColorValue("#006B63")
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            Height: =If(App.Width < 900 && Parent.Height < 740, 40, 52)
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =If(App.Width < 900 && Parent.Height < 740, 10, 11)
+            Text: =LookUp(colIssues, Id = varIssueId).Impact
+            VerticalAlign: =VerticalAlign.Top
+            Visible: =!varShowHistory && !varShowEditor && (App.Width >= 900 || varShowDetail)
+            Width: =If(App.Width >= 900, App.Width * 0.57 - 48, App.Width - 48)
+            X: =If(App.Width >= 900, App.Width * 0.43 + 24, 24)
+            Y: =If(App.Width < 900, 374, 350)
+      - lblNextHeading:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Brand.Text
+            DisplayMode: =DisplayMode.View
+            FocusedBorderColor: =ColorValue("#006B63")
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =24
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =10
+            Text: ="NEXT STEP"
+            Visible: =!varShowHistory && !varShowEditor && (App.Width >= 900 || varShowDetail)
+            Width: =If(App.Width >= 900, App.Width * 0.57 - 48, App.Width - 48)
+            X: =If(App.Width >= 900, App.Width * 0.43 + 24, 24)
+            Y: =If(App.Width < 900, If(Parent.Height < 740, 424, 452), 414)
+      - lblNext:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Brand.Text
+            DisplayMode: =DisplayMode.View
+            FocusedBorderColor: =ColorValue("#006B63")
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            Height: =If(App.Width < 900 && Parent.Height < 740, 40, 52)
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =If(App.Width < 900 && Parent.Height < 740, 10, 11)
+            Text: =LookUp(colIssues, Id = varIssueId).NextStep
+            VerticalAlign: =VerticalAlign.Top
+            Visible: =!varShowHistory && !varShowEditor && (App.Width >= 900 || varShowDetail)
+            Width: =If(App.Width >= 900, App.Width * 0.57 - 48, App.Width - 48)
+            X: =If(App.Width >= 900, App.Width * 0.43 + 24, 24)
+            Y: =If(App.Width < 900, If(Parent.Height < 740, 450, 480), 442)
+      - btnEditIssue:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =Brand.Border
+            BorderThickness: =1
+            Color: =Brand.PrimaryText
+            DisabledColor: =Brand.DisabledText
+            DisabledFill: =Brand.Disabled
+            Fill: =Brand.Primary
+            FocusedBorderColor: =Brand.Focus
+            Font: =Font.'Segoe UI'
+            HoverColor: =Brand.PrimaryText
+            HoverFill: =Brand.Primary
+            OnSelect: =Set(varEditId,varIssueId); Set(varPriority,LookUp(colIssues, Id = varIssueId).Priority); Set(varShowEditor,true); Reset(txtIssueTitle); Reset(txtImpact); Reset(txtNextStep); Reset(txtOwner)
+            PressedColor: =Brand.PrimaryText
+            PressedFill: =Brand.Primary
+            RadiusBottomLeft: =6
+            RadiusBottomRight: =6
+            RadiusTopLeft: =6
+            RadiusTopRight: =6
+            Size: =11
+            Text: ="Update issue"
+            Visible: =!varShowHistory && !varShowEditor && (App.Width >= 900 || varShowDetail) && !IsBlank(LookUp(colIssues,Id=varIssueId).Id)
+            Width: =If(App.Width < 900, 104, 120)
+            X: =If(App.Width >= 900, App.Width * 0.43 + 24, 24)
+            Y: =Parent.Height - If(App.Width < 900, 171, 152)
+      - btnProgress:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =Brand.Border
+            BorderThickness: =1
+            Color: =Brand.SecondaryText
+            Fill: =Brand.PrimarySoft
+            FocusedBorderColor: =Brand.Focus
+            Font: =Font.'Segoe UI'
+            HoverColor: =Brand.SecondaryText
+            HoverFill: =Brand.PrimarySoft
+            OnSelect: =Patch(colIssues, LookUp(colIssues, Id = varIssueId), {Status:"In progress"}); Notify("Issue updated.",NotificationType.Success)
+            PressedColor: =Brand.SecondaryText
+            PressedFill: =Brand.PrimarySoft
+            RadiusBottomLeft: =6
+            RadiusBottomRight: =6
+            RadiusTopLeft: =6
+            RadiusTopRight: =6
+            Size: =11
+            Text: ="In progress"
+            Visible: =!varShowHistory && !varShowEditor && (App.Width >= 900 || varShowDetail) && LookUp(colIssues, Id = varIssueId).Status = "Open" && !IsBlank(LookUp(colIssues,Id=varIssueId).Id)
+            Width: =If(App.Width < 900, 104, 120)
+            X: =btnEditIssue.X + If(App.Width < 900, 112, 130)
+            Y: =Parent.Height - If(App.Width < 900, 171, 152)
+      - btnResolve:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =Brand.Border
+            BorderThickness: =1
+            Color: =Brand.SecondaryText
+            Fill: =Brand.PrimarySoft
+            FocusedBorderColor: =Brand.Focus
+            Font: =Font.'Segoe UI'
+            HoverColor: =Brand.SecondaryText
+            HoverFill: =Brand.PrimarySoft
+            OnSelect: =Patch(colIssues, LookUp(colIssues, Id = varIssueId), {Status:"Resolved", ResolvedAt:Now()}); Notify("Resolved. This issue will not carry forward.",NotificationType.Success)
+            PressedColor: =Brand.SecondaryText
+            PressedFill: =Brand.PrimarySoft
+            RadiusBottomLeft: =6
+            RadiusBottomRight: =6
+            RadiusTopLeft: =6
+            RadiusTopRight: =6
+            Size: =11
+            Text: ="Resolve"
+            Visible: =!varShowHistory && !varShowEditor && (App.Width >= 900 || varShowDetail) && LookUp(colIssues, Id = varIssueId).Status <> "Resolved" && !IsBlank(LookUp(colIssues,Id=varIssueId).Id)
+            Width: =102
+            X: =btnEditIssue.X + If(btnProgress.Visible, If(App.Width < 900, 224, 258), If(App.Width < 900, 112, 130))
+            Y: =Parent.Height - If(App.Width < 900, 171, 152)
+      - lblAck:
+          Control: Label@2.5.1
+          Properties:
+            Color: =If(BrandDark,Brand.MutedText,ColorValue("#D3E2EF"))
+            DisplayMode: =DisplayMode.View
+            FocusedBorderColor: =ColorValue("#006B63")
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            Height: =24
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =9
+            Text: |-
+              =If(LookUp(colHandovers, Id = varHandoverId).Status = "Acknowledged", "Acknowledged by " & LookUp(colHandovers, Id = varHandoverId).AcknowledgedBy & " · " & Text(LookUp(colHandovers, Id = varHandoverId).AcknowledgedAt, "dd mmm hh:mm"), If(LookUp(colHandovers, Id = varHandoverId).Status = "Submitted", "Incoming shift: review the handover, then acknowledge.", "Complete the summary and issues, then submit."))
+            Visible: =!varShowHistory && !varShowEditor
+            Width: =If(App.Width < 900, Parent.Width - 48, Parent.Width - 420)
+            X: =32
+            Y: =If(App.Width >= 900, Parent.Height - 82, Parent.Height - 112)
+      - txtIncoming:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            AccessibleLabel: ="Your name"
+            BorderColor: =Brand.Border
+            BorderThickness: =1
+            Color: =Brand.Text
+            Default: =""
+            DisabledColor: =Brand.MutedText
+            DisabledFill: =Brand.Input
+            Fill: =Brand.Input
+            FocusedBorderColor: =Brand.Focus
+            Font: =Font.'Segoe UI'
+            HintText: ="Your name"
+            HoverBorderColor: =Brand.Focus
+            HoverColor: =Brand.Text
+            HoverFill: =Brand.Input
+            RadiusBottomLeft: =6
+            RadiusBottomRight: =6
+            RadiusTopLeft: =6
+            RadiusTopRight: =6
+            Size: =11
+            Visible: =!varShowHistory && !varShowEditor && LookUp(colHandovers, Id = varHandoverId).Status = "Submitted"
+            Width: =If(App.Width < 900, (Parent.Width - 80) / 2, 170)
+            X: =If(App.Width < 900, 32, Parent.Width - 370)
+            Y: =Parent.Height - 82
+      - btnAck:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =Brand.Border
+            BorderThickness: =1
+            Color: =Brand.PrimaryText
+            DisabledColor: =Brand.DisabledText
+            DisabledFill: =Brand.Disabled
+            DisplayMode: =If(IsBlank(Trim(txtIncoming.Text)),DisplayMode.Disabled,DisplayMode.Edit)
+            Fill: =Brand.Primary
+            FocusedBorderColor: =Brand.Focus
+            Font: =Font.'Segoe UI'
+            HoverColor: =Brand.PrimaryText
+            HoverFill: =Brand.Primary
+            OnSelect: =If(LookUp(colHandovers, Id = varHandoverId).Status = "Submitted" && !IsBlank(Trim(txtIncoming.Text)), Patch(colHandovers, LookUp(colHandovers, Id = varHandoverId), {Status:"Acknowledged", AcknowledgedBy:Trim(txtIncoming.Text), AcknowledgedAt:Now()}); Notify("Handover acknowledged.", NotificationType.Success))
+            PressedColor: =Brand.PrimaryText
+            PressedFill: =Brand.Primary
+            RadiusBottomLeft: =6
+            RadiusBottomRight: =6
+            RadiusTopLeft: =6
+            RadiusTopRight: =6
+            Size: =11
+            Text: ="Acknowledge"
+            Visible: =!varShowHistory && !varShowEditor && LookUp(colHandovers, Id = varHandoverId).Status = "Submitted"
+            Width: =If(App.Width < 900, Parent.Width / 2 - 40, 164)
+            X: =If(App.Width < 900, Parent.Width / 2 + 8, Parent.Width - 188)
+            Y: =Parent.Height - 82
+      - btnSubmit:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =Brand.Border
+            BorderThickness: =1
+            Color: =Brand.PrimaryText
+            DisabledColor: =Brand.DisabledText
+            DisabledFill: =Brand.Disabled
+            DisplayMode: =If(IsBlank(Trim(txtSummary.Text)),DisplayMode.Disabled,DisplayMode.Edit)
+            Fill: =Brand.Primary
+            FocusedBorderColor: =Brand.Focus
+            Font: =Font.'Segoe UI'
+            HoverColor: =Brand.PrimaryText
+            HoverFill: =Brand.Primary
+            OnSelect: =If(LookUp(colHandovers, Id = varHandoverId).Status = "Draft" && !IsBlank(Trim(txtSummary.Text)), Patch(colHandovers, LookUp(colHandovers, Id = varHandoverId), {Summary:Trim(txtSummary.Text),Status:"Submitted",SubmittedAt:Now()}); Reset(txtIncoming); Notify("Ready for incoming-shift acknowledgement.",NotificationType.Success))
+            PressedColor: =Brand.PrimaryText
+            PressedFill: =Brand.Primary
+            RadiusBottomLeft: =6
+            RadiusBottomRight: =6
+            RadiusTopLeft: =6
+            RadiusTopRight: =6
+            Size: =11
+            Text: ="Submit handover"
+            Visible: =!varShowHistory && !varShowEditor && LookUp(colHandovers, Id = varHandoverId).Status = "Draft"
+            Width: =164
+            X: =Parent.Width - 188
+            Y: =Parent.Height - 82
+      - btnNext:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =Brand.Border
+            BorderThickness: =1
+            Color: =Brand.PrimaryText
+            DisabledColor: =Brand.DisabledText
+            DisabledFill: =Brand.Disabled
+            Fill: =Brand.Primary
+            FocusedBorderColor: =Brand.Focus
+            Font: =Font.'Segoe UI'
+            HoverColor: =Brand.PrimaryText
+            HoverFill: =Brand.Primary
+            OnSelect: =If(LookUp(colHandovers,Id=varHandoverId).Status="Acknowledged", With({draft:LookUp(colHandovers,Status="Draft")}, If(!IsBlank(draft.Id), Set(varHandoverId,draft.Id), Set(varNewId,"H" & Text(CountRows(colHandovers)+1,"000")); Collect(colHandovers,{Id:varNewId,Title:"Shift " & Text(CountRows(colHandovers)+1) & " · " & Text(Now(),"dd mmm"),Summary:"",Status:"Draft",CreatedAt:Now(),SubmittedAt:Date(2000,1,1),AcknowledgedBy:"",AcknowledgedAt:Date(2000,1,1)}); Collect(colLinks, ForAll(Filter(colIssues,Status<>"Resolved") As issue, If(IsBlank(LookUp(colLinks,Key=varNewId & "|" & issue.Id)),{Key:varNewId & "|" & issue.Id,HandoverId:varNewId,IssueId:issue.Id})));Set(varHandoverId,varNewId))); Set(varIssueId,First(Filter(colIssues,Id in Filter(colLinks,HandoverId=varHandoverId).IssueId)).Id); Set(varShowDetail,false); Reset(txtSummary); Notify("Unresolved issues carried forward using their existing IDs.",NotificationType.Success))
+            PressedColor: =Brand.PrimaryText
+            PressedFill: =Brand.Primary
+            RadiusBottomLeft: =6
+            RadiusBottomRight: =6
+            RadiusTopLeft: =6
+            RadiusTopRight: =6
+            Size: =11
+            Text: ="Next handover"
+            Visible: =!varShowHistory && !varShowEditor && LookUp(colHandovers, Id = varHandoverId).Status = "Acknowledged"
+            Width: =164
+            X: =Parent.Width - 188
+            Y: =Parent.Height - 82
+      - lblHistoryTitle:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Brand.Text
+            DisplayMode: =DisplayMode.View
+            FocusedBorderColor: =ColorValue("#006B63")
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =36
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =22
+            Text: ="Handover history"
+            Visible: =varShowHistory
+            Width: =Parent.Width - 48
+            X: =24
+            Y: =102
+      - lblHistoryNote:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Brand.MutedText
+            DisplayMode: =DisplayMode.View
+            FocusedBorderColor: =ColorValue("#006B63")
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            Height: =48
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =11
+            Text: ="Open a handover to see its linked issues and acknowledgement. Issues keep the same ID across shifts."
+            Visible: =varShowHistory
+            Width: =Parent.Width - 48
+            X: =24
+            Y: =146
+      - galHistory:
+          Control: Gallery@2.15.0
+          Variant: BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0
+          Properties:
+            AccessibleLabel: ="Handover history"
+            FocusedBorderThickness: =2
+            Height: =Parent.Height - 262
+            Items: =Sort(colHandovers,CreatedAt,SortOrder.Descending)
+            OnSelect: =Set(varHandoverId,ThisItem.Id); Set(varShowHistory,false); Set(varShowDetail,false); Set(varIssueId,First(Filter(colIssues,Id in Filter(colLinks,HandoverId=varHandoverId).IssueId)).Id); Reset(txtSummary)
+            TabIndex: =0
+            TemplatePadding: =6
+            TemplateSize: =106
+            Visible: =varShowHistory
+            Width: =Parent.Width - 48
+            X: =24
+            Y: =208
+          Children:
+            - rctHistory:
+                Control: Rectangle@2.3.0
+                Properties:
+                  BorderColor: =Brand.Border
+                  BorderThickness: =1
+                  Fill: =Brand.Surface
+                  OnSelect: =Select(Parent)
+                  Width: =Parent.TemplateWidth
+            - lblHistoryRow:
+                Control: Label@2.5.1
+                Properties:
+                  Color: =Brand.Text
+                  Font: =Font.'Segoe UI'
+                  FontWeight: =FontWeight.Semibold
+                  Height: =30
+                  OnSelect: =Select(Parent)
+                  PaddingLeft: =0
+                  PaddingRight: =0
+                  Size: =16
+                  Text: =ThisItem.Title
+                  Width: =Parent.TemplateWidth - 32
+                  X: =16
+                  Y: =10
+            - lblHistoryStatus:
+                Control: Label@2.5.1
+                Properties:
+                  Color: =Brand.Text
+                  Font: =Font.'Segoe UI'
+                  Height: =24
+                  OnSelect: =Select(Parent)
+                  PaddingLeft: =0
+                  PaddingRight: =0
+                  Size: =11
+                  Text: =ThisItem.Status & "  ·  " & Text(CountRows(Filter(colLinks,HandoverId=ThisItem.Id))) & " linked issues"
+                  Width: =Parent.TemplateWidth - 32
+                  X: =16
+                  Y: =44
+            - lblHistoryAck:
+                Control: Label@2.5.1
+                Properties:
+                  Color: =Brand.MutedText
+                  Font: =Font.'Segoe UI'
+                  Height: =24
+                  OnSelect: =Select(Parent)
+                  PaddingLeft: =0
+                  PaddingRight: =0
+                  Size: =10
+                  Text: =If(ThisItem.Status="Acknowledged","Acknowledged by " & ThisItem.AcknowledgedBy & " at " & Text(ThisItem.AcknowledgedAt,"dd mmm hh:mm"),"Awaiting handover completion")
+                  Width: =Parent.TemplateWidth - 32
+                  X: =16
+                  Y: =70
+      - lblEditTitle:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Brand.Text
+            DisplayMode: =DisplayMode.View
+            FocusedBorderColor: =ColorValue("#006B63")
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =36
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =22
+            Text: =If(IsBlank(varEditId),"Add an issue","Update issue · " & varEditId)
+            Visible: =varShowEditor
+            Width: =Parent.Width - 48
+            X: =24
+            Y: =102
+      - lblTitlePrompt:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Brand.Text
+            DisplayMode: =DisplayMode.View
+            FocusedBorderColor: =ColorValue("#006B63")
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =24
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =10
+            Text: ="ISSUE TITLE *"
+            Visible: =varShowEditor
+            Width: =Parent.Width - 48
+            X: =24
+            Y: =156
+      - txtIssueTitle:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            AccessibleLabel: ="Short, specific issue title"
+            BorderColor: =Brand.Border
+            BorderThickness: =1
+            Color: =Brand.Text
+            Default: =If(IsBlank(varEditId),"",LookUp(colIssues,Id=varEditId).Title)
+            DisabledColor: =Brand.MutedText
+            DisabledFill: =Brand.Input
+            Fill: =Brand.Input
+            FocusedBorderColor: =Brand.Focus
+            Font: =Font.'Segoe UI'
+            Height: =42
+            HintText: ="Short, specific issue title"
+            HoverBorderColor: =Brand.Focus
+            HoverColor: =Brand.Text
+            HoverFill: =Brand.Input
+            MaxLength: =120
+            RadiusBottomLeft: =6
+            RadiusBottomRight: =6
+            RadiusTopLeft: =6
+            RadiusTopRight: =6
+            Size: =11
+            Visible: =varShowEditor
+            Width: =Parent.Width - 48
+            X: =24
+            Y: =184
+      - lblImpactPrompt:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Brand.Text
+            DisplayMode: =DisplayMode.View
+            FocusedBorderColor: =ColorValue("#006B63")
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =24
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =10
+            Text: ="IMPACT *"
+            Visible: =varShowEditor
+            Width: =Parent.Width - 48
+            X: =24
+            Y: =240
+      - txtImpact:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            AccessibleLabel: ="What is affected and how?"
+            BorderColor: =Brand.Border
+            BorderThickness: =1
+            Color: =Brand.Text
+            Default: =If(IsBlank(varEditId),"",LookUp(colIssues,Id=varEditId).Impact)
+            DisabledColor: =Brand.MutedText
+            DisabledFill: =Brand.Input
+            Fill: =Brand.Input
+            FocusedBorderColor: =Brand.Focus
+            Font: =Font.'Segoe UI'
+            Height: =78
+            HintText: ="What is affected and how?"
+            HoverBorderColor: =Brand.Focus
+            HoverColor: =Brand.Text
+            HoverFill: =Brand.Input
+            MaxLength: =1000
+            Mode: =TextMode.MultiLine
+            RadiusBottomLeft: =6
+            RadiusBottomRight: =6
+            RadiusTopLeft: =6
+            RadiusTopRight: =6
+            Size: =11
+            Visible: =varShowEditor
+            Width: =Parent.Width - 48
+            X: =24
+            Y: =268
+      - lblNextPrompt:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Brand.Text
+            DisplayMode: =DisplayMode.View
+            FocusedBorderColor: =ColorValue("#006B63")
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =24
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =10
+            Text: ="NEXT STEP *"
+            Visible: =varShowEditor
+            Width: =Parent.Width - 48
+            X: =24
+            Y: =360
+      - txtNextStep:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            AccessibleLabel: ="What should the next shift do?"
+            BorderColor: =Brand.Border
+            BorderThickness: =1
+            Color: =Brand.Text
+            Default: =If(IsBlank(varEditId),"",LookUp(colIssues,Id=varEditId).NextStep)
+            DisabledColor: =Brand.MutedText
+            DisabledFill: =Brand.Input
+            Fill: =Brand.Input
+            FocusedBorderColor: =Brand.Focus
+            Font: =Font.'Segoe UI'
+            Height: =78
+            HintText: ="What should the next shift do?"
+            HoverBorderColor: =Brand.Focus
+            HoverColor: =Brand.Text
+            HoverFill: =Brand.Input
+            MaxLength: =1000
+            Mode: =TextMode.MultiLine
+            RadiusBottomLeft: =6
+            RadiusBottomRight: =6
+            RadiusTopLeft: =6
+            RadiusTopRight: =6
+            Size: =11
+            Visible: =varShowEditor
+            Width: =Parent.Width - 48
+            X: =24
+            Y: =388
+      - lblOwnerPrompt:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Brand.Text
+            DisplayMode: =DisplayMode.View
+            FocusedBorderColor: =ColorValue("#006B63")
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =24
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =10
+            Text: ="OWNER *"
+            Visible: =varShowEditor
+            Width: =Parent.Width - 48
+            X: =24
+            Y: =480
+      - txtOwner:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            AccessibleLabel: ="Issue owner"
+            BorderColor: =Brand.Border
+            BorderThickness: =1
+            Color: =Brand.Text
+            Default: =If(IsBlank(varEditId),"",LookUp(colIssues,Id=varEditId).Owner)
+            DisabledColor: =Brand.MutedText
+            DisabledFill: =Brand.Input
+            Fill: =Brand.Input
+            FocusedBorderColor: =Brand.Focus
+            Font: =Font.'Segoe UI'
+            Height: =42
+            HintText: ="Issue owner"
+            HoverBorderColor: =Brand.Focus
+            HoverColor: =Brand.Text
+            HoverFill: =Brand.Input
+            MaxLength: =100
+            RadiusBottomLeft: =6
+            RadiusBottomRight: =6
+            RadiusTopLeft: =6
+            RadiusTopRight: =6
+            Size: =11
+            Visible: =varShowEditor
+            Width: =Parent.Width - 220
+            X: =24
+            Y: =508
+      - btnPriority:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =Brand.Border
+            BorderThickness: =0
+            Color: =Color.White
+            Fill: =If(varPriority="High",ColorValue("#A54B20"),Brand.Selected)
+            FocusedBorderColor: =Brand.Focus
+            Font: =Font.'Segoe UI'
+            HoverColor: =Color.White
+            HoverFill: =Self.Fill
+            OnSelect: =Set(varPriority,If(varPriority="Normal","High","Normal"))
+            PressedColor: =Color.White
+            PressedFill: =Self.Fill
+            RadiusBottomLeft: =6
+            RadiusBottomRight: =6
+            RadiusTopLeft: =6
+            RadiusTopRight: =6
+            Size: =11
+            Text: =varPriority & " priority"
+            Visible: =varShowEditor
+            Width: =156
+            X: =Parent.Width - 180
+            Y: =508
+      - lblRequired:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Brand.MutedText
+            DisplayMode: =DisplayMode.View
+            FocusedBorderColor: =ColorValue("#006B63")
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =11
+            Text: ="All four fields are required. Saving an update keeps the existing issue ID."
+            Visible: =false
+            Width: =Parent.Width - 48
+            X: =24
+            Y: =570
+      - btnCancelIssue:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =Brand.Border
+            BorderThickness: =1
+            Color: =Color.White
+            Fill: =Brand.Selected
+            FocusedBorderColor: =Brand.Focus
+            Font: =Font.'Segoe UI'
+            HoverColor: =Color.White
+            HoverFill: =Brand.Header
+            OnSelect: =Set(varShowEditor,false)
+            PressedColor: =Color.White
+            PressedFill: =Brand.Header
+            RadiusBottomLeft: =6
+            RadiusBottomRight: =6
+            RadiusTopLeft: =6
+            RadiusTopRight: =6
+            Size: =11
+            Text: ="Cancel"
+            Visible: =varShowEditor
+            Width: =112
+            X: =Parent.Width - 280
+            Y: =Parent.Height - 82
+      - btnSaveIssue:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =Brand.Border
+            BorderThickness: =1
+            Color: =Brand.PrimaryText
+            DisabledColor: =Brand.DisabledText
+            DisabledFill: =Brand.Disabled
+            DisplayMode: =If(IsBlank(Trim(txtIssueTitle.Text)) || IsBlank(Trim(txtImpact.Text)) || IsBlank(Trim(txtNextStep.Text)) || IsBlank(Trim(txtOwner.Text)),DisplayMode.Disabled,DisplayMode.Edit)
+            Fill: =Brand.Primary
+            FocusedBorderColor: =Brand.Focus
+            Font: =Font.'Segoe UI'
+            HoverColor: =Brand.PrimaryText
+            HoverFill: =Brand.Primary
+            OnSelect: =If(varShowEditor, If(!IsBlank(Trim(txtIssueTitle.Text)) && !IsBlank(Trim(txtImpact.Text)) && !IsBlank(Trim(txtNextStep.Text)) && !IsBlank(Trim(txtOwner.Text)), If(IsBlank(varEditId),Set(varCreatedIssue,"I" & Text(CountRows(colIssues)+1,"000")); Collect(colIssues,{Id:varCreatedIssue,Title:Trim(txtIssueTitle.Text),Impact:Trim(txtImpact.Text),NextStep:Trim(txtNextStep.Text),Owner:Trim(txtOwner.Text),Priority:varPriority,Status:"Open",CreatedAt:Now(),ResolvedAt:Date(2000,1,1)}); Collect(colLinks,{Key:varHandoverId & "|" & varCreatedIssue,HandoverId:varHandoverId,IssueId:varCreatedIssue});Set(varIssueId,varCreatedIssue);Set(varEditId,varCreatedIssue),Patch(colIssues,LookUp(colIssues,Id=varEditId),{Title:Trim(txtIssueTitle.Text),Impact:Trim(txtImpact.Text),NextStep:Trim(txtNextStep.Text),Owner:Trim(txtOwner.Text),Priority:varPriority});Set(varIssueId,varEditId)); Set(varShowEditor,false);Set(varShowDetail,true);Notify("Issue saved.",NotificationType.Success)))
+            PressedColor: =Brand.PrimaryText
+            PressedFill: =Brand.Primary
+            RadiusBottomLeft: =6
+            RadiusBottomRight: =6
+            RadiusTopLeft: =6
+            RadiusTopRight: =6
+            Size: =11
+            Text: ="Save issue"
+            Visible: =varShowEditor
+            Width: =132
+            X: =Parent.Width - 156
+            Y: =Parent.Height - 82
+      - lblNoIssues:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Brand.MutedText
+            DisplayMode: =DisplayMode.View
+            FocusedBorderColor: =ColorValue("#006B63")
+            FocusedBorderThickness: =2
+            Height: =100
+            OnSelect: =
+            Text: ="No open issues carried forward. Add a new issue if needed."
+            Visible: =!varShowHistory && !varShowEditor && IsEmpty(Filter(colLinks,HandoverId=varHandoverId))
+            Width: =If(App.Width >= 900, App.Width * 0.43 - 36, App.Width - 48)
+            X: =24
+            Y: =290
+      - btnOpenBranding:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =Brand.Border
+            BorderThickness: =1
+            Color: =Color.White
+            Fill: =Brand.Header
+            FocusedBorderColor: =Brand.Focus
+            FocusedBorderThickness: =3
+            Font: =Font.'Segoe UI'
+            Height: =If(App.Width < 600, 28, 40)
+            HoverColor: =Color.White
+            HoverFill: =Brand.Selected
+            OnSelect: =Set(varBrandPreviousDark,BrandDark); Set(varBrandPreviousPrimary,BrandPrimaryHex); Set(varBrandPreviousAccent,BrandAccentHex); Set(varBrandPreviousName,Brand.Name); Reset(txtBrandPrimary); Reset(txtBrandAccent); Navigate(Branding,ScreenTransition.None)
+            PressedColor: =Color.White
+            PressedFill: =Brand.Selected
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            Size: =If(App.Width < 600, 10, 11)
+            Text: ="Branding"
+            Width: =If(App.Width < 600, 96, 100)
+            X: =If(App.Width < 600, Parent.Width-120, Parent.Width-230)
+            Y: =If(App.Width < 600, 48, 22)

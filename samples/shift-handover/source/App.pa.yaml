@@ -1,0 +1,62 @@
+# ************************************************************************************************
+# Warning: YAML source code for Canvas Apps should only be used to review changes made within Power Apps Studio and for minor edits (Preview).
+# Use the maker portal to create and edit your Power Apps.
+# 
+# The schema file for Canvas Apps is available at https://go.microsoft.com/fwlink/?linkid=2304907
+# 
+# For more information, visit https://go.microsoft.com/fwlink/?linkid=2292623
+# ************************************************************************************************
+App:
+  Properties:
+    Formulas: |-
+      =BrandPrimaryHex = Upper(If(App.ActiveScreen = Branding && IsMatch(Trim(txtBrandPrimary.Text), "^#[0-9A-Fa-f]{6}$"), Trim(txtBrandPrimary.Text), Coalesce(varBrandPrimary, "#006B63")));
+      BrandAccentHex = Upper(If(App.ActiveScreen = Branding && IsMatch(Trim(txtBrandAccent.Text), "^#[0-9A-Fa-f]{6}$"), Trim(txtBrandAccent.Text), Coalesce(varBrandAccent, "#5EEAD4")));
+      BrandPrimaryR = (Find(Mid(BrandPrimaryHex, 2, 1), "0123456789ABCDEF") - 1) * 16 + Find(Mid(BrandPrimaryHex, 3, 1), "0123456789ABCDEF") - 1;
+      BrandPrimaryG = (Find(Mid(BrandPrimaryHex, 4, 1), "0123456789ABCDEF") - 1) * 16 + Find(Mid(BrandPrimaryHex, 5, 1), "0123456789ABCDEF") - 1;
+      BrandPrimaryB = (Find(Mid(BrandPrimaryHex, 6, 1), "0123456789ABCDEF") - 1) * 16 + Find(Mid(BrandPrimaryHex, 7, 1), "0123456789ABCDEF") - 1;
+      BrandPrimaryLuminance = 0.2126 * If(BrandPrimaryR / 255 <= 0.04045, BrandPrimaryR / 3294.6, Power((BrandPrimaryR / 255 + 0.055) / 1.055, 2.4)) + 0.7152 * If(BrandPrimaryG / 255 <= 0.04045, BrandPrimaryG / 3294.6, Power((BrandPrimaryG / 255 + 0.055) / 1.055, 2.4)) + 0.0722 * If(BrandPrimaryB / 255 <= 0.04045, BrandPrimaryB / 3294.6, Power((BrandPrimaryB / 255 + 0.055) / 1.055, 2.4));
+      BrandAccentR = (Find(Mid(BrandAccentHex, 2, 1), "0123456789ABCDEF") - 1) * 16 + Find(Mid(BrandAccentHex, 3, 1), "0123456789ABCDEF") - 1;
+      BrandAccentG = (Find(Mid(BrandAccentHex, 4, 1), "0123456789ABCDEF") - 1) * 16 + Find(Mid(BrandAccentHex, 5, 1), "0123456789ABCDEF") - 1;
+      BrandAccentB = (Find(Mid(BrandAccentHex, 6, 1), "0123456789ABCDEF") - 1) * 16 + Find(Mid(BrandAccentHex, 7, 1), "0123456789ABCDEF") - 1;
+      BrandAccentLuminance = 0.2126 * If(BrandAccentR / 255 <= 0.04045, BrandAccentR / 3294.6, Power((BrandAccentR / 255 + 0.055) / 1.055, 2.4)) + 0.7152 * If(BrandAccentG / 255 <= 0.04045, BrandAccentG / 3294.6, Power((BrandAccentG / 255 + 0.055) / 1.055, 2.4)) + 0.0722 * If(BrandAccentB / 255 <= 0.04045, BrandAccentB / 3294.6, Power((BrandAccentB / 255 + 0.055) / 1.055, 2.4));
+      BrandHeaderCss = If(BrandDark,"#100C0B","rgb(" & Text(Round(BrandPrimaryR * 0.12 + 8, 0), "0", "en-US") & "," & Text(Round(BrandPrimaryG * 0.12 + 8, 0), "0", "en-US") & "," & Text(Round(BrandPrimaryB * 0.12 + 8, 0), "0", "en-US") & ")");
+      BrandHeroStartCss = If(BrandThemeName="Ember","#44251F","rgb(" & Text(Round(BrandPrimaryR * 0.2 + 12, 0), "0", "en-US") & "," & Text(Round(BrandPrimaryG * 0.2 + 12, 0), "0", "en-US") & "," & Text(Round(BrandPrimaryB * 0.2 + 12, 0), "0", "en-US") & ")");
+      BrandHeroMiddleCss = If(BrandThemeName="Ember","#582C22","rgb(" & Text(Round(BrandPrimaryR * 0.35 + 10, 0), "0", "en-US") & "," & Text(Round(BrandPrimaryG * 0.35 + 10, 0), "0", "en-US") & "," & Text(Round(BrandPrimaryB * 0.35 + 10, 0), "0", "en-US") & ")");
+      BrandHeroEndCss = If(BrandThemeName="Ember","#6C3527","rgb(" & Text(Round(BrandAccentR * 0.4 + 8, 0), "0", "en-US") & "," & Text(Round(BrandAccentG * 0.4 + 8, 0), "0", "en-US") & "," & Text(Round(BrandAccentB * 0.4 + 8, 0), "0", "en-US") & ")");
+      BrandSelectedCss = If(BrandDark,"#3D2C25","rgb(" & Text(Round(BrandPrimaryR * 0.3 + 16, 0), "0", "en-US") & "," & Text(Round(BrandPrimaryG * 0.3 + 16, 0), "0", "en-US") & "," & Text(Round(BrandPrimaryB * 0.3 + 16, 0), "0", "en-US") & ")");
+      BrandFooterCss = If(BrandDark,"#211815","rgb(" & Text(Round(BrandPrimaryR * 0.16 + 12, 0), "0", "en-US") & "," & Text(Round(BrandPrimaryG * 0.16 + 12, 0), "0", "en-US") & "," & Text(Round(BrandPrimaryB * 0.16 + 12, 0), "0", "en-US") & ")");
+      BrandThemeName = If(App.ActiveScreen = Branding && (BrandPrimaryHex <> Upper(Coalesce(varBrandPrimary,"#006B63")) || BrandAccentHex <> Upper(Coalesce(varBrandAccent,"#5EEAD4"))), "Custom", Coalesce(varBrandName,"Tidal"));
+      BrandDark = Coalesce(varBrandDark, Coalesce(varBrandName,"Tidal")="Ember");
+      BrandCanvasCss = If(BrandDark,"#171211","#EDF2F8");
+      BrandSurfaceCss = If(BrandDark,"#241B18","#FFFFFF");
+      BrandRaisedCss = If(BrandDark,"#32241F","#F1F5F9");
+      BrandTextCss = If(BrandDark,"#F7F0E8","#172B4D");
+      BrandMutedTextCss = If(BrandDark,"#D3C2B7","#667B8F");
+      BrandBorderCss = If(BrandDark,"#9F8271","#64748B");
+      BrandSoftBorderCss = If(BrandDark,"#6B5147","#E1E7EF");
+      BrandInputCss = If(BrandDark,"#000000","#FFFFFF");
+      BrandFocusCss = If(BrandDark,"#F4BE52","#334155");
+      BrandDangerTextCss = If(BrandDark,"#FFB4A4","#9B2C20");
+      BrandHighTextCss = If(BrandDark,"#F7C986","#9B431B");
+      BrandGoodTextCss = If(BrandDark,"#9EDBC4","#137866");
+      BrandDisabledCss = If(BrandDark,"#3B2D26","#D8E0E9");
+      BrandDisabledTextCss = If(BrandDark,"#CEBBAF","#526579");
+      BrandHeaderColor = If(BrandDark,ColorValue("#100C0B"),RGBA(Round(BrandPrimaryR*0.12+8,0),Round(BrandPrimaryG*0.12+8,0),Round(BrandPrimaryB*0.12+8,0),1));
+      Brand = {Name: BrandThemeName, Primary: ColorValue(BrandPrimaryHex), Accent: ColorValue(BrandAccentHex), PrimaryText: If(BrandPrimaryLuminance > 0.179,Color.Black,Color.White), AccentText: If(BrandAccentLuminance > 0.179,Color.Black,Color.White), PrimaryTextCss: If(BrandPrimaryLuminance > 0.179,"#000000","#FFFFFF"), AccentTextCss: If(BrandAccentLuminance > 0.179,"#000000","#FFFFFF"), Header: BrandHeaderColor, Selected: If(BrandDark,ColorValue("#3D2C25"),RGBA(Round(BrandPrimaryR*0.3+16,0),Round(BrandPrimaryG*0.3+16,0),Round(BrandPrimaryB*0.3+16,0),1)), Footer: If(BrandDark,ColorValue("#211815"),RGBA(Round(BrandPrimaryR*0.16+12,0),Round(BrandPrimaryG*0.16+12,0),Round(BrandPrimaryB*0.16+12,0),1)), PrimarySoft: If(BrandDark,ColorValue("#32241F"),ColorFade(ColorValue(BrandPrimaryHex),0.9)), AccentSoft: If(BrandDark,ColorValue("#32241F"),ColorFade(ColorValue(BrandAccentHex),0.85)), SecondaryText: If(BrandDark,ColorValue("#F7F0E8"),BrandHeaderColor), Canvas: ColorValue(BrandCanvasCss), Surface: ColorValue(BrandSurfaceCss), Raised: ColorValue(BrandRaisedCss), Text: ColorValue(BrandTextCss), MutedText: ColorValue(BrandMutedTextCss), Border: ColorValue(BrandBorderCss), SoftBorder: ColorValue(BrandSoftBorderCss), Input: ColorValue(BrandInputCss), Focus: ColorValue(BrandFocusCss), DangerText: ColorValue(BrandDangerTextCss), HighText: ColorValue(BrandHighTextCss), GoodText: ColorValue(BrandGoodTextCss), Disabled: ColorValue(BrandDisabledCss), DisabledText: ColorValue(BrandDisabledTextCss)};
+    OnStart: |-
+      =Set(varHandoverId, "H001");
+      Set(varIssueId, "I001");
+      Set(varShowEditor, false);
+      Set(varShowHistory, false);
+      Set(varShowDetail, false);
+      Set(varEditId, "");
+      Set(varPriority, "Normal");
+      ClearCollect(colHandovers, {Id:"H001", Title:"Day shift · 09 Nov", Summary:"Line 2 is running at reduced speed. Keep an eye on packaging stock and confirm the maintenance visit.", Status:"Submitted", CreatedAt:Now(), SubmittedAt:Now(), AcknowledgedBy:"", AcknowledgedAt:Date(2000,1,1)});
+      ClearCollect(colIssues,
+      {Id:"I001", Title:"Line 2 intermittent sensor fault", Impact:"Reduced output by around 15%. No safety impact in this fictional example.", NextStep:"Check the sensor alignment with maintenance at 14:00. Keep the line at the agreed reduced speed.", Owner:"Sam Patel", Priority:"High", Status:"In progress", CreatedAt:Now(), ResolvedAt:Date(2000,1,1)},
+      {Id:"I002", Title:"Packaging stock running low", Impact:"Current stock covers approximately four hours of production.", NextStep:"Confirm the delivery ETA with stores before 15:00.", Owner:"Alex Morgan", Priority:"Normal", Status:"Open", CreatedAt:Now(), ResolvedAt:Date(2000,1,1)},
+      {Id:"I003", Title:"Scanner battery replaced", Impact:"Dispatch scanning is operating normally again.", NextStep:"No further action required.", Owner:"Jamie Lee", Priority:"Normal", Status:"Resolved", CreatedAt:Now(), ResolvedAt:Now()});
+      ClearCollect(colLinks, {Key:"H001|I001", HandoverId:"H001", IssueId:"I001"}, {Key:"H001|I002", HandoverId:"H001", IssueId:"I002"}, {Key:"H001|I003", HandoverId:"H001", IssueId:"I003"});
+      Set(varBrandPrimary, "#006B63"); Set(varBrandAccent, "#5EEAD4"); Set(varBrandName, "Tidal"); Set(varBrandDark,false)
+    StartScreen: =Screen1
+    Theme: =PowerAppsTheme

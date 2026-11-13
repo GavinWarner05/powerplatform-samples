@@ -1,0 +1,343 @@
+# ************************************************************************************************
+# Warning: YAML source code for Canvas Apps should only be used to review changes made within Power Apps Studio and for minor edits (Preview).
+# Use the maker portal to create and edit your Power Apps.
+# 
+# The schema file for Canvas Apps is available at https://go.microsoft.com/fwlink/?linkid=2304907
+# 
+# For more information, visit https://go.microsoft.com/fwlink/?linkid=2292623
+# ************************************************************************************************
+Screens:
+  Branding:
+    Properties:
+      Fill: =Brand.Canvas
+      LoadingSpinnerColor: =RGBA(0, 120, 212, 1)
+    Children:
+      - htmlBrandBackdrop:
+          Control: HtmlViewer@2.1.0
+          Properties:
+            Height: =Parent.Height
+            HtmlText: ="<div style='height:" & Text(Parent.Height-4) & "px;background:" & BrandCanvasCss & ";font-family:Segoe UI;'><div style='height:84px;background:" & BrandHeaderCss & ";'></div>" & If(App.Width >= 900,"<div style='position:absolute;left:24px;top:112px;width:410px;height:" & Text(Parent.Height-136) & "px;background:" & BrandSurfaceCss & ";border-radius:20px;box-shadow:0 6px 20px rgba(18,40,70,.07);'></div>","") & "</div>"
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Width: =Parent.Width
+      - lblBrandingTitle:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Color.White
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =38
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =If(App.Width < 900, 21, 25)
+            Text: ="Make it yours."
+            Width: =Parent.Width-160
+            X: =24
+            Y: =14
+      - lblBrandingSubtitle:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Color.White
+            Font: =Font.'Segoe UI'
+            Height: =24
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =8
+            Text: ="BRANDING STUDIO  /  SESSION PREVIEW"
+            Width: =Parent.Width-48
+            X: =24
+            Y: =51
+      - btnBrandCancel:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =Brand.Border
+            BorderThickness: =1
+            Color: =Color.White
+            Fill: =Color.Transparent
+            FocusedBorderColor: =Brand.Focus
+            FocusedBorderThickness: =3
+            Font: =Font.'Segoe UI'
+            HoverColor: =Color.White
+            HoverFill: =Brand.Selected
+            OnSelect: =Set(varBrandDark,varBrandPreviousDark); Set(varBrandPrimary,varBrandPreviousPrimary); Set(varBrandAccent,varBrandPreviousAccent); Set(varBrandName,varBrandPreviousName); Navigate(Screen1,ScreenTransition.None)
+            PressedColor: =Color.White
+            PressedFill: =Brand.Selected
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            Size: =11
+            Text: ="Cancel"
+            Width: =100
+            X: =Parent.Width-124
+            Y: =20
+      - lblBrandPresets:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Brand.Text
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =28
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =10
+            Text: ="01  CHOOSE A STARTING POINT"
+            Width: =300
+            X: =If(App.Width >= 900, 48, 24)
+            Y: =If(App.Width >= 900, 132, 100)
+      - btnBrandTidal:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =Brand.Border
+            BorderThickness: =If(Brand.Name="Tidal",3,1)
+            Color: =Color.White
+            Fill: =ColorValue("#006B63")
+            FocusedBorderColor: =Brand.Focus
+            FocusedBorderThickness: =3
+            Font: =Font.'Segoe UI'
+            Height: =If(App.Width >= 900, 54, 42)
+            HoverColor: =Color.White
+            HoverFill: =ColorValue("#006B63")
+            OnSelect: =Set(varBrandDark,false); Set(varBrandPrimary, "#006B63"); Set(varBrandAccent, "#5EEAD4"); Set(varBrandName, "Tidal"); Reset(txtBrandPrimary); Reset(txtBrandAccent)
+            PressedColor: =Color.White
+            PressedFill: =ColorValue("#006B63")
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            Size: =11
+            Text: =If(Brand.Name="Tidal", "✓ Tidal", "Tidal")
+            Width: =If(App.Width >= 900, 110, (Parent.Width-72)/3)
+            X: =If(App.Width >= 900, 48, 24 + 0 * ((Parent.Width-72)/3+12))
+            Y: =If(App.Width >= 900, 174, 136)
+      - btnBrandIndigo:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =Brand.Border
+            BorderThickness: =If(Brand.Name="Indigo",3,1)
+            Color: =Color.White
+            Fill: =ColorValue("#5B3FD3")
+            FocusedBorderColor: =Brand.Focus
+            FocusedBorderThickness: =3
+            Font: =Font.'Segoe UI'
+            Height: =If(App.Width >= 900, 54, 42)
+            HoverColor: =Color.White
+            HoverFill: =ColorValue("#5B3FD3")
+            OnSelect: =Set(varBrandDark,false); Set(varBrandPrimary, "#5B3FD3"); Set(varBrandAccent, "#C4B5FD"); Set(varBrandName, "Indigo"); Reset(txtBrandPrimary); Reset(txtBrandAccent)
+            PressedColor: =Color.White
+            PressedFill: =ColorValue("#5B3FD3")
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            Size: =11
+            Text: =If(Brand.Name="Indigo", "✓ Indigo", "Indigo")
+            Width: =If(App.Width >= 900, 110, (Parent.Width-72)/3)
+            X: =If(App.Width >= 900, 170, 24 + 1 * ((Parent.Width-72)/3+12))
+            Y: =If(App.Width >= 900, 174, 136)
+      - btnBrandEmber:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =Brand.Border
+            BorderThickness: =If(Brand.Name="Ember",3,1)
+            Color: =ColorValue("#171211")
+            Fill: =ColorValue("#CE704B")
+            FocusedBorderColor: =Brand.Focus
+            FocusedBorderThickness: =3
+            Font: =Font.'Segoe UI'
+            Height: =If(App.Width >= 900, 54, 42)
+            HoverColor: =ColorValue("#171211")
+            HoverFill: =ColorValue("#CE704B")
+            OnSelect: =Set(varBrandDark,true); Set(varBrandPrimary, "#CE704B"); Set(varBrandAccent, "#F4BE52"); Set(varBrandName, "Ember"); Reset(txtBrandPrimary); Reset(txtBrandAccent)
+            PressedColor: =ColorValue("#171211")
+            PressedFill: =ColorValue("#CE704B")
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            Size: =11
+            Text: =If(Brand.Name="Ember", "✓ Ember", "Ember")
+            Width: =If(App.Width >= 900, 110, (Parent.Width-72)/3)
+            X: =If(App.Width >= 900, 292, 24 + 2 * ((Parent.Width-72)/3+12))
+            Y: =If(App.Width >= 900, 174, 136)
+      - lblBrandCustom:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Brand.Text
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Height: =28
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =10
+            Text: ="02  ADD YOUR COMPANY COLORS"
+            Width: =300
+            X: =If(App.Width >= 900, 48, 24)
+            Y: =If(App.Width >= 900, 254, 194)
+      - lblBrandPrimary:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Brand.Text
+            Font: =Font.'Segoe UI'
+            Height: =20
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =10
+            Text: ="Primary color"
+            Width: =160
+            X: =If(App.Width >= 900, 48, 24)
+            Y: =If(App.Width >= 900, 290, 228)
+      - lblBrandAccent:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Brand.Text
+            Font: =Font.'Segoe UI'
+            Height: =20
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =10
+            Text: ="Accent color"
+            Width: =160
+            X: =If(App.Width >= 900, 236, Parent.Width/2+8)
+            Y: =If(App.Width >= 900, 290, 228)
+      - txtBrandPrimary:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            AccessibleLabel: ="Primary color, six-digit hex code"
+            BorderColor: =Brand.Border
+            BorderThickness: =1
+            Color: =Brand.Text
+            Default: =Coalesce(varBrandPrimary, "#006B63")
+            DisabledColor: =Brand.MutedText
+            DisabledFill: =Brand.Input
+            Fill: =Brand.Input
+            FocusedBorderColor: =Brand.Focus
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            Height: =42
+            HintText: ="#006B63"
+            HoverBorderColor: =Brand.Focus
+            HoverColor: =Brand.Text
+            HoverFill: =Brand.Input
+            MaxLength: =7
+            Size: =12
+            Width: =If(App.Width >= 900, 174, Parent.Width/2-32)
+            X: =If(App.Width >= 900, 48, 24)
+            Y: =If(App.Width >= 900, 316, 254)
+      - txtBrandAccent:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            AccessibleLabel: ="Accent color, six-digit hex code"
+            BorderColor: =Brand.Border
+            BorderThickness: =1
+            Color: =Brand.Text
+            Default: =Coalesce(varBrandAccent, "#5EEAD4")
+            DisabledColor: =Brand.MutedText
+            DisabledFill: =Brand.Input
+            Fill: =Brand.Input
+            FocusedBorderColor: =Brand.Focus
+            FocusedBorderThickness: =2
+            Font: =Font.'Segoe UI'
+            Height: =42
+            HintText: ="#5EEAD4"
+            HoverBorderColor: =Brand.Focus
+            HoverColor: =Brand.Text
+            HoverFill: =Brand.Input
+            MaxLength: =7
+            Size: =12
+            Width: =If(App.Width >= 900, 174, Parent.Width/2-32)
+            X: =If(App.Width >= 900, 236, Parent.Width/2+8)
+            Y: =If(App.Width >= 900, 316, 254)
+      - lblBrandValidation:
+          Control: Label@2.5.1
+          Properties:
+            Color: =If(IsMatch(Trim(txtBrandPrimary.Text), "^#[0-9A-Fa-f]{6}$") && IsMatch(Trim(txtBrandAccent.Text), "^#[0-9A-Fa-f]{6}$"),Brand.MutedText,Brand.DangerText)
+            Font: =Font.'Segoe UI'
+            Height: =42
+            Live: =Live.Polite
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =9
+            Text: |-
+              =If(!(IsMatch(Trim(txtBrandPrimary.Text), "^#[0-9A-Fa-f]{6}$")) || !(IsMatch(Trim(txtBrandAccent.Text), "^#[0-9A-Fa-f]{6}$")), "Use # plus 6 hex digits, e.g. #005EA8. Invalid colors fall back to the previous theme.", "Preview updates as you type. Text contrast is adjusted automatically.")
+            Width: =If(App.Width >= 900, 362, Parent.Width-48)
+            X: =If(App.Width >= 900, 48, 24)
+            Y: =If(App.Width >= 900, 368, 300)
+      - lblBrandSessionNote:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Brand.MutedText
+            Font: =Font.'Segoe UI'
+            Height: =60
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =10
+            Text: ="Your colors, our layout. Status colors stay consistent so high-priority and resolved issues remain easy to recognize."
+            Visible: =App.Width >= 900
+            Width: =362
+            X: =48
+            Y: =428
+      - btnBrandApply:
+          Control: Classic/Button@2.2.0
+          Properties:
+            BorderColor: =Brand.Border
+            BorderThickness: =1
+            Color: =Brand.PrimaryText
+            DisabledColor: =Brand.DisabledText
+            DisabledFill: =Brand.Disabled
+            DisplayMode: =If(IsMatch(Trim(txtBrandPrimary.Text), "^#[0-9A-Fa-f]{6}$") && IsMatch(Trim(txtBrandAccent.Text), "^#[0-9A-Fa-f]{6}$"),DisplayMode.Edit,DisplayMode.Disabled)
+            Fill: =Brand.Primary
+            FocusedBorderColor: =Brand.Focus
+            FocusedBorderThickness: =3
+            Font: =Font.'Segoe UI'
+            HoverColor: =Brand.PrimaryText
+            HoverFill: =Brand.Primary
+            OnSelect: =With({chosenName:Brand.Name, chosenPrimary:BrandPrimaryHex, chosenAccent:BrandAccentHex}, Set(varBrandName,chosenName);Set(varBrandPrimary,chosenPrimary);Set(varBrandAccent,chosenAccent)); Navigate(Screen1,ScreenTransition.None)
+            PressedColor: =Brand.PrimaryText
+            PressedFill: =Brand.Primary
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            Size: =11
+            Text: ="Use for this session"
+            Width: =If(App.Width >= 900, 362, Parent.Width-48)
+            X: =If(App.Width >= 900, 48, 24)
+            Y: =Parent.Height-76
+      - lblBrandPrototype:
+          Control: Label@2.5.1
+          Properties:
+            Color: =Brand.MutedText
+            Font: =Font.'Segoe UI'
+            Height: =24
+            OnSelect: =
+            PaddingLeft: =0
+            PaddingRight: =0
+            Size: =8
+            Text: ="PROTOTYPE · Resets when reopened. No shared company settings are saved."
+            Width: =Parent.Width-48
+            X: =24
+            Y: =Parent.Height-30
+      - htmlBrandPreview:
+          Control: HtmlViewer@2.1.0
+          Properties:
+            Height: =If(App.Width >= 900, Parent.Height-148, Parent.Height-432)
+            HtmlText: |-
+              ="<div style='box-sizing:border-box;height:" & Text(Self.Height-4) & "px;padding:" & If(App.Width>=900,"24","12") & "px;background:" & BrandSurfaceCss & ";border:1px solid " & BrandSoftBorderCss & ";border-radius:20px;font-family:Segoe UI;overflow:hidden;'><div style='font-size:11px;font-weight:600;letter-spacing:1px;color:" & BrandMutedTextCss & ";'>LIVE PREVIEW · " & Upper(Brand.Name) & "</div><div style='margin-top:12px;padding:12px 16px;border-radius:12px;background:" & BrandHeaderCss & ";color:white;font-size:14px;font-weight:600;'>» &nbsp; Shift handover</div><div style='margin-top:10px;padding:" & If(App.Width>=900,"22","12") & "px;border-radius:16px;background:linear-gradient(115deg," & BrandHeroStartCss & " 0%," & BrandHeroMiddleCss & " 65%," & BrandHeroEndCss & " 100%);color:white;'><div style='font-weight:600;font-size:" & If(App.Width>=900,"26","17") & "px;'>Day shift · ready to hand over</div><div style='margin-top:6px;font-size:11px;'>Submitted / 3 linked issues</div>" & If(App.Width>=900,"<div style='margin-top:12px;font-size:13px;line-height:1.5;'>A confident look that carries your company colors through every shift.</div>","") & "</div>" & If(App.Width>=900,"<div style='margin-top:18px;padding:18px;border-radius:14px;border-left:4px solid #F5B66B;background:" & BrandSelectedCss & ";color:white;'><div style='font-size:15px;font-weight:600;'>Line 2 intermittent sensor fault</div><div style='margin-top:8px;font-size:12px;'>In progress / High priority</div></div>","") & "<div style='margin-top:14px;'><span style='display:inline-block;padding:10px 14px;border-radius:8px;border:1px solid " & BrandBorderCss & ";background:" & BrandPrimaryHex & ";color:" & Brand.PrimaryTextCss & ";font-size:12px;font-weight:600;'>Primary action</span><span style='display:inline-block;margin-left:8px;padding:10px 14px;border-radius:8px;border:1px solid " & BrandBorderCss & ";background:" & BrandAccentHex & ";color:" & Brand.AccentTextCss & ";font-size:12px;font-weight:600;'>Accent action</span></div></div>"
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Width: =If(App.Width >= 900, Parent.Width-482, Parent.Width-48)
+            X: =If(App.Width >= 900, 458, 24)
+            Y: =If(App.Width >= 900, 112, 344)

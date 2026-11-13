@@ -1,0 +1,79 @@
+[
+  {
+    "name": "pnp-powerplatform-samples-shift-handover",
+    "source": "pnp",
+    "title": "Shift Handover",
+    "shortDescription": "A session-only shift handover canvas app with issue tracking, acknowledgements, carry-forward and customizable branding.",
+    "url": "https://github.com/pnp/powerplatform-samples/tree/main/samples/shift-handover",
+    "downloadUrl": "https://pnp.github.io/download-partial/?url=https://github.com/pnp/powerplatform-samples/tree/main/samples/shift-handover",
+    "longDescription": [
+      "Explore shift handover interactions using fictional in-memory data and configurable color themes."
+    ],
+    "creationDateTime": "2026-11-13",
+    "updateDateTime": "2026-11-13",
+    "products": [
+      "Power Apps",
+      "Power Fx"
+    ],
+    "tags": [
+      "Handover",
+      "Operations",
+      "Branding"
+    ],
+    "categories": [
+      "CANVAS"
+    ],
+    "metadata": [
+      {
+        "key": "POWERAPPS-EXPERIMENTAL",
+        "value": "No"
+      },
+      {
+        "key": "POWERAPPS-PREMIUM",
+        "value": "No"
+      },
+      {
+        "key": "POWERAPPS-ONPREM",
+        "value": "No"
+      },
+      {
+        "key": "POWERAPPS-CUSTOMCONNECTOR",
+        "value": "No"
+      }
+    ],
+    "thumbnails": [
+      {
+        "type": "image",
+        "order": 100,
+        "url": "https://github.com/pnp/powerplatform-samples/raw/main/samples/shift-handover/assets/overview.jpg",
+        "alt": "Shift handover issue queue and selected issue"
+      },
+      {
+        "type": "image",
+        "order": 101,
+        "url": "https://github.com/pnp/powerplatform-samples/raw/main/samples/shift-handover/assets/branding.jpg",
+        "alt": "Branding studio with color inputs"
+      },
+      {
+        "type": "image",
+        "order": 102,
+        "url": "https://github.com/pnp/powerplatform-samples/raw/main/samples/shift-handover/assets/ember.jpg",
+        "alt": "Ember dark theme preview"
+      }
+    ],
+    "authors": [
+      {
+        "gitHubAccount": "GavinWarner05",
+        "pictureUrl": "https://github.com/GavinWarner05.png",
+        "name": "Gavin Warner"
+      }
+    ],
+    "references": [
+      {
+        "name": "Microsoft Power Platform documentation",
+        "description": "Discover how to make the most of Microsoft Power Platform products with online training courses, docs, and videos covering product capabilities and how-to guides.",
+        "url": "https://learn.microsoft.com/power-platform/"
+      }
+    ]
+  }
+]
